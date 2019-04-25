@@ -46,6 +46,13 @@ class Bot {
     }
 
     void writeComment() {
+        while (true) {
+            try {
+                driver.switchTo().alert().accept();
+            } catch (NoAlertPresentException e) {
+                break;
+            }
+        }
         WebElement id = driver.findElement(By.id("comment_nick"));
         WebElement pw = driver.findElement(By.id("comment_pw"));
         String ids = id.getText();
@@ -69,6 +76,13 @@ class Bot {
     }
 
     void recommend() {
+        while (true) {
+            try {
+                driver.switchTo().alert().accept();
+            } catch (NoAlertPresentException e) {
+                break;
+            }
+        }
         WebElement button = driver.findElement(By.id("recommend_join"));
         if (needCode) {
             String code = mainWindow.codeField.getText();
