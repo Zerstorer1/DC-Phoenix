@@ -51,6 +51,8 @@ class Bot {
                 driver.switchTo().alert().accept();
             } catch (NoAlertPresentException e) {
                 break;
+            }catch (Exception e) {
+                break;
             }
         }
         WebElement id = driver.findElement(By.id("comment_nick"));
@@ -81,6 +83,8 @@ class Bot {
                 driver.switchTo().alert().accept();
             } catch (NoAlertPresentException e) {
                 break;
+            }catch (Exception e) {
+                break;
             }
         }
         WebElement button = driver.findElement(By.id("recommend_join"));
@@ -108,6 +112,8 @@ class Bot {
                         driver.switchTo().alert().accept();
                     } catch (NoAlertPresentException e) {
                         break;
+                    }catch (Exception e) {
+                        break;
                     }
                 }
 
@@ -122,6 +128,15 @@ class Bot {
 
 
     void clear() {
+        while (true) {
+            try {
+                driver.switchTo().alert().accept();
+            } catch (NoAlertPresentException e) {
+                break;
+            } catch (Exception e){
+                break;
+            }
+        }
 //        connectTo("chrome://settings/clearBrowserData");
 //        WebElement clearButton = driver.findElement(By.cssSelector("* /deep/ #clearBrowsingDataConfirm"));
 //        clearButton.click();
@@ -218,12 +233,13 @@ class Bot {
         Map<String, String> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceName", "Nexus 5");
         ChromeOptions options = new ChromeOptions();
-        try {
+        options.addArguments("--incognito");
+    /*    try {
             options.addExtensions(new File("Adguard.crx")); //AdGuard
             mainWindow.appendInfoText("Adguard 로드");
         } catch (Exception e) {
             mainWindow.appendInfoText("Adguard 사용 안함");
-        }
+        }*/
         options.setExperimentalOption("mobileEmulation", mobileEmulation);
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //응답시간 5초설정
